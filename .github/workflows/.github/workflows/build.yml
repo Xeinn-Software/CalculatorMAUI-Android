@@ -35,5 +35,4 @@ jobs:
           name: Calculator-Android
           path: |
             **/*.apk
-            **/*-Signed.apk
           if-no-files-found: warn
