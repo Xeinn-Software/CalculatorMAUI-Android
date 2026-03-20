@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="CalculatorMAUI.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Eymen's Calculator"
+             BackgroundColor="#050D1A"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <Style x:Key="NumBtn" TargetType="Button">
+            <Setter Property="BackgroundColor"  Value="#331E3A5C"/>
+            <Setter Property="TextColor"        Value="#D0E8FF"/>
+            <Setter Property="FontSize"         Value="20"/>
+            <Setter Property="FontAttributes"   Value="Bold"/>
+            <Setter Property="CornerRadius"     Value="14"/>
+            <Setter Property="Margin"           Value="3"/>
+        </Style>
+        <Style x:Key="OpBtn" TargetType="Button">
+            <Setter Property="BackgroundColor"  Value="#881565C0"/>
+            <Setter Property="TextColor"        Value="#FFFFFF"/>
+            <Setter Property="FontSize"         Value="22"/>
+            <Setter Property="FontAttributes"   Value="Bold"/>
+            <Setter Property="CornerRadius"     Value="14"/>
+            <Setter Property="Margin"           Value="3"/>
+        </Style>
+        <Style x:Key="EqBtn" TargetType="Button">
+            <Setter Property="BackgroundColor"  Value="#AA0D47A1"/>
+            <Setter Property="TextColor"        Value="#FFFFFF"/>
+            <Setter Property="FontSize"         Value="24"/>
+            <Setter Property="FontAttributes"   Value="Bold"/>
+            <Setter Property="CornerRadius"     Value="14"/>
+            <Setter Property="Margin"           Value="3"/>
+        </Style>
+        <Style x:Key="FnBtn" TargetType="Button">
+            <Setter Property="BackgroundColor"  Value="#771976D2"/>
+            <Setter Property="TextColor"        Value="#C8E0FF"/>
+            <Setter Property="FontSize"         Value="14"/>
+            <Setter Property="CornerRadius"     Value="12"/>
+            <Setter Property="Margin"           Value="2"/>
+        </Style>
+        <Style x:Key="ClrBtn" TargetType="Button">
+            <Setter Property="BackgroundColor"  Value="#771A237E"/>
+            <Setter Property="TextColor"        Value="#E3F2FD"/>
+            <Setter Property="FontSize"         Value="16"/>
+            <Setter Property="FontAttributes"   Value="Bold"/>
+            <Setter Property="CornerRadius"     Value="14"/>
+            <Setter Property="Margin"           Value="3"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto" Padding="0">
+
+        <!-- Animasyon + ekran + tuşlar -->
+        <Grid Grid.Row="0" RowDefinitions="Auto,Auto,Auto,*">
+
+            <!-- Ekran -->
+            <Border Grid.Row="0"
+                    BackgroundColor="#07111F"
+                    Stroke="#1565C0"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16"
+                    Margin="12,48,12,6"
+                    Padding="16,12">
+                <VerticalStackLayout>
+                    <Label x:Name="lblExpression"
+                           Text=""
+                           TextColor="#4A7FC1"
+                           FontSize="14"
+                           HorizontalTextAlignment="End"/>
+                    <Label x:Name="lblDisplay"
+                           Text="0"
+                           TextColor="#D0E8FF"
+                           FontSize="42"
+                           FontAttributes="None"
+                           HorizontalTextAlignment="End"
+                           LineBreakMode="NoWrap"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Fonksiyon satırı 1 -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*" Margin="10,2">
+                <Button Grid.Column="0" Text="sin" Style="{StaticResource FnBtn}" Clicked="FnClicked" CommandParameter="sin"/>
+                <Button Grid.Column="1" Text="cos" Style="{StaticResource FnBtn}" Clicked="FnClicked" CommandParameter="cos"/>
+                <Button Grid.Column="2" Text="tan" Style="{StaticResource FnBtn}" Clicked="FnClicked" CommandParameter="tan"/>
+                <Button Grid.Column="3" Text="log" Style="{StaticResource FnBtn}" Clicked="FnClicked" CommandParameter="log"/>
+                <Button Grid.Column="4" Text="ln"  Style="{StaticResource FnBtn}" Clicked="FnClicked" CommandParameter="ln"/>
+            </Grid>
+
+            <!-- Fonksiyon satırı 2 -->
+            <Grid Grid.Row="2" ColumnDefinitions="*,*,*,*,*" Margin="10,2">
+                <Button Grid.Column="0" Text="√"   Style="{StaticResource FnBtn}" Clicked="FnClicked" CommandParameter="sqrt"/>
+                <Button Grid.Column="1" Text="x²"  Style="{StaticResource FnBtn}" Clicked="FnClicked" CommandParameter="sq"/>
+                <Button Grid.Column="2" Text="xʸ"  Style="{StaticResource FnBtn}" Clicked="FnClicked" CommandParameter="pow"/>
+                <Button Grid.Column="3" Text="π"   Style="{StaticResource FnBtn}" Clicked="FnClicked" CommandParameter="pi"/>
+                <Button Grid.Column="4" Text="1/x" Style="{StaticResource FnBtn}" Clicked="FnClicked" CommandParameter="inv"/>
+            </Grid>
+
+            <!-- Ana tuşlar -->
+            <Grid Grid.Row="3" Margin="10,4,10,10"
+                  RowDefinitions="*,*,*,*,*"
+                  ColumnDefinitions="*,*,*,*">
+
+                <!-- Satır 0 -->
+                <Button Grid.Row="0" Grid.Column="0" Text="AC"  Style="{StaticResource ClrBtn}" Clicked="AcClicked"/>
+                <Button Grid.Row="0" Grid.Column="1" Text="+/-" Style="{StaticResource ClrBtn}" Clicked="SignClicked"/>
+                <Button Grid.Row="0" Grid.Column="2" Text="⌫"   Style="{StaticResource ClrBtn}" Clicked="BackClicked" FontSize="20"/>
+                <Button Grid.Row="0" Grid.Column="3" Text="÷"   Style="{StaticResource OpBtn}"  Clicked="OpClicked" CommandParameter="÷"/>
+
+                <!-- Satır 1: 1 2 3 -->
+                <Button Grid.Row="1" Grid.Column="0" Text="1" Style="{StaticResource NumBtn}" Clicked="NumClicked"/>
+                <Button Grid.Row="1" Grid.Column="1" Text="2" Style="{StaticResource NumBtn}" Clicked="NumClicked"/>
+                <Button Grid.Row="1" Grid.Column="2" Text="3" Style="{StaticResource NumBtn}" Clicked="NumClicked"/>
+                <Button Grid.Row="1" Grid.Column="3" Text="×" Style="{StaticResource OpBtn}"  Clicked="OpClicked" CommandParameter="×"/>
+
+                <!-- Satır 2: 4 5 6 -->
+                <Button Grid.Row="2" Grid.Column="0" Text="4" Style="{StaticResource NumBtn}" Clicked="NumClicked"/>
+                <Button Grid.Row="2" Grid.Column="1" Text="5" Style="{StaticResource NumBtn}" Clicked="NumClicked"/>
+                <Button Grid.Row="2" Grid.Column="2" Text="6" Style="{StaticResource NumBtn}" Clicked="NumClicked"/>
+                <Button Grid.Row="2" Grid.Column="3" Text="−" Style="{StaticResource OpBtn}"  Clicked="OpClicked" CommandParameter="−"/>
+
+                <!-- Satır 3: 7 8 9 -->
+                <Button Grid.Row="3" Grid.Column="0" Text="7" Style="{StaticResource NumBtn}" Clicked="NumClicked"/>
+                <Button Grid.Row="3" Grid.Column="1" Text="8" Style="{StaticResource NumBtn}" Clicked="NumClicked"/>
+                <Button Grid.Row="3" Grid.Column="2" Text="9" Style="{StaticResource NumBtn}" Clicked="NumClicked"/>
+                <Button Grid.Row="3" Grid.Column="3" Text="+" Style="{StaticResource OpBtn}"  Clicked="OpClicked" CommandParameter="+"/>
+
+                <!-- Satır 4: 0 . = -->
+                <Button Grid.Row="4" Grid.Column="0" Text="0" Style="{StaticResource NumBtn}" Clicked="NumClicked"/>
+                <Button Grid.Row="4" Grid.Column="1" Text="." Style="{StaticResource NumBtn}" Clicked="DotClicked"/>
+                <Button Grid.Row="4" Grid.Column="2" Text="( )" Style="{StaticResource FnBtn}" Clicked="ParenClicked"/>
+                <Button Grid.Row="4" Grid.Column="3" Text="=" Style="{StaticResource EqBtn}"  Clicked="EqClicked"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

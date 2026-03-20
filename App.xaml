@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Application x:Class="CalculatorMAUI.App"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BgDark">#050D1A</Color>
+            <Color x:Key="BgMid">#07111F</Color>
+            <Color x:Key="Blue">#1565C0</Color>
+            <Color x:Key="BlueDark">#0D47A1</Color>
+            <Color x:Key="BlueDeep">#1A237E</Color>
+            <Color x:Key="BlueMid">#1976D2</Color>
+            <Color x:Key="TextLight">#D0E8FF</Color>
+            <Color x:Key="TextDim">#4A7FC1</Color>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
